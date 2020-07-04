@@ -24,6 +24,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
     
     if (user.bot) return; // If the user was a bot, return.
     if (!reaction.message.guild) return; // If the user was reacting something but not in the guild/server, ignore them.
+    if (!reaction.message.id === "582628247980998796") return;
     if (reaction.message.guild.id !== "531630990691532821") return; // Use this if your bot was only for one server/private server.
     
     if (reaction.message.channel.id === "582478995724173323") { // This is a #self-roles channel.
@@ -37,20 +38,5 @@ client.on("messageReactionAdd", async (reaction, user) => {
     }
   })
 
-client.on("message", async  message => {
-    
-    const prefix = "k!"
-    if (message.author.bot) return;
-    if (!message.guild) return;
-    if (!message.content.startsWith(prefix)) return;
-    if (!message.member) message.member = await message.guild.fetchMember(message);
-
-    const args = message.content.slice(prefix.length).trim().split(/ +/g);
-    
-
- 
-    
-
-});
 
 client.login(process.env.TOKEN);
