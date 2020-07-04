@@ -29,6 +29,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
     if (reaction.message.channel.id === "582478995724173323") { // This is a #self-roles channel.
       if (reaction.emoji.name === "☑️") {
         await reaction.message.guild.members.cache.get(user.id).roles.add("531856634406764544") 
+          return
       }
       
     } else {
