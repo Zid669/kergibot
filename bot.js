@@ -17,15 +17,14 @@ client.on("ready", () => {
 });
 
 client.on("messageReactionAdd", async (reaction, user) => {
-    // If a message gains a reaction and it is uncached, fetch and cache the message.
-    // You should account for any errors while fetching, it could return API errors if the resource is missing.
-    if (reaction.message.partial) await reaction.message.fetch(); // Partial messages do not contain any content so skip them.
+    
+    if (reaction.message.partial) await reaction.message.fetch(); 
     if (reaction.partial) await reaction.fetch();
     
-    if (user.bot) return; // If the user was a bot, return.
-    if (!reaction.message.guild) return; // If the user was reacting something but not in the guild/server, ignore them.
-    if (!reaction.message.id === "582628247980998796") return;
-    if (reaction.message.guild.id !== "531630990691532821") return; // Use this if your bot was only for one server/private server.
+    if (user.bot) return;
+    if (!reaction.message.guild) return; 
+    if (reaction.message.guild.id !== "531630990691532821") return; 
+    if (reaction.message.guild.members.chace.get(user.id).roles.has("531856634406764544")) return;
     
     if (reaction.message.channel.id === "582478995724173323") { // This is a #self-roles channel.
       if (reaction.emoji.name === "☑️") {
@@ -34,7 +33,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
       }
       
     } else {
-      return; // If the channel was not a #self-roles, ignore them.
+      return; 
     }
   })
 
