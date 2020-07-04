@@ -50,6 +50,7 @@ client.on("message", async  message => {
 
     if (message.content === prefix + "test"){
 
+        if (message.author.id === "400801854608637953"){
       const embed = new Discord.MessageEmbed();
       embed.setAuthor(message.guild.name, message.guild.iconURL({format: "png", dynamic: true}));
       embed.setTitle("Nasz Regulamin!");
@@ -60,6 +61,9 @@ client.on("message", async  message => {
       - 4. Nie reklamuj się/nikogo bez zgody administracji, zakaz wysyłania niebezpiecznych linków i nsfw. Dotyczy równierz prywatnych wiadomości poprzez serwer.
       - 5. Twój nick musi być mentionable - zakaz dziwnych czcionek (nie dotyczy nicknamów aka pseudonimów), pustych nicków itp.`);
       embed.setColor("GREEN");
+        }else{
+            return;
+        }
 
 
 
