@@ -17,25 +17,58 @@ client.on("ready", () => {
 });
 
 client.on("messageReactionAdd", async (reaction, user) => {
-    
-    if (reaction.message.partial) await reaction.message.fetch(); 
+    // If a message gains a reaction and it is uncached, fetch and cache the message.
+    // You should account for any errors while fetching, it could return API errors if the resource is missing.
+    if (reaction.message.partial) await reaction.message.fetch(); // Partial messages do not contain any content so skip them.
     if (reaction.partial) await reaction.fetch();
     
-    if (user.bot) return;
-    if (!reaction.message.guild) return; 
-    if (reaction.message.guild.id !== "531630990691532821") return; 
-    if (reaction.message.guild.members.chace.get(user.id).roles.has("531856634406764544")) return;
+    if (user.bot) return; // If the user was a bot, return.
+    if (!reaction.message.guild) return; // If the user was reacting something but not in the guild/server, ignore them.
+    if (reaction.message.guild.id !== "531630990691532821") return;
+    if (reaction.message.guild.members.chace.get(user.id).roles.has("531856634406764544")) return; // Use this if your bot was only for one server/private server.
     
     if (reaction.message.channel.id === "582478995724173323") { // This is a #self-roles channel.
       if (reaction.emoji.name === "☑️") {
         await reaction.message.guild.members.cache.get(user.id).roles.add("531856634406764544") 
-          return
       }
       
     } else {
-      return; 
+      return; // If the channel was not a #self-roles, ignore them.
     }
   })
 
+client.on("message", async  message => {
+    
+    const prefix = "k!"
+    if (message.author.bot) return;
+    if (!message.guild) return;
+    if (!message.content.startsWith(prefix)) return;
+    if (!message.member) message.member = await message.guild.fetchMember(message);
+
+    const args = message.content.slice(prefix.length).trim().split(/ +/g);
+    
+
+    if (message.content === prefix + "test"){
+
+      const embed = new Discord.MessageEmbed();
+      embed.setAuthor(message.guild.name, message.guild.iconURL({format: "png", dynamic: true}));
+      embed.setTitle("Nasz Regulamin!");
+      embed.setDescription(`Witaj na serwerze poświęconym działalności KergiTV, oto kilka zasad których powinniśmy przestrzegać żeby wszystkim nam żyło się tutaj dobrze:
+      - 1. Respektuj ToS discorda
+      - 2. Respektuj innych - Mowa nienawiści, rasizm, dramy, rozmowy o polityce, trollowanie, każda forma spamu będzie karana.
+      - 3. Zachowuj temat rozmowy do odpowiedniego kanału.
+      - 4. Nie reklamuj się/nikogo bez zgody administracji, zakaz wysyłania niebezpiecznych linków i nsfw. Dotyczy równierz prywatnych wiadomości poprzez serwer.
+      - 5. Twój nick musi być mentionable - zakaz dziwnych czcionek (nie dotyczy nicknamów aka pseudonimów), pustych nicków itp.`);
+      embed.setColor("GREEN");
+
+
+
+      message.channel.send(embed)
+      
+    }
+ 
+    
+
+});
 
 client.login(process.env.TOKEN);
