@@ -61,13 +61,15 @@ client.on("message", async  message => {
       - 4. Nie reklamuj się/nikogo bez zgody administracji, zakaz wysyłania niebezpiecznych linków i nsfw. Dotyczy równierz prywatnych wiadomości poprzez serwer.
       - 5. Twój nick musi być mentionable - zakaz dziwnych czcionek (nie dotyczy nicknamów aka pseudonimów), pustych nicków itp.`);
       embed.setColor("GREEN");
+            
+            message.channel.send(embed)
         }else{
             return;
         }
 
 
 
-      message.channel.send(embed)
+      
       
     }
  
