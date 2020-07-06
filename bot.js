@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const { config } = require("dotenv");
-const { promptMessage } = require("./functions");
 
 const client = new Discord.Client({
     disableEveryone: true
@@ -49,9 +48,10 @@ client.on("messageReactionRemove", async (reaction, user) => {
   if (reaction.message.channel.id === "582478995724173323") {
     if (reaction.emoji.name === "☑️") {
       await reaction.message.guild.members.cache.get(user.id).roles.remove("531856634406764544") 
+    }
     } else {
     return;
-  }
+  
       
   }
 })
