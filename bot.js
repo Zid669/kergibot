@@ -52,6 +52,8 @@ client.on("messageReactionRemove", async (reaction, user) => {
     } else {
     return;
   }
+      
+  }
 })
 
 client.on("message", async  message => {
