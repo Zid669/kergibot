@@ -25,7 +25,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
     if (user.bot) return; // If the user was a bot, return.
     if (!reaction.message.guild) return; // If the user was reacting something but not in the guild/server, ignore them.
     if (reaction.message.guild.id !== "531630990691532821") return;
-    if (reaction.message.guild.members.cache.get(user.id).roles.add("531856634406764544")) return;
+    if (reaction.message.guild.members.cache.get(user.id).roles.has("531856634406764544")) return;
     
     if (reaction.message.channel.id === "582478995724173323") { // This is a #self-roles channel.
       if (reaction.emoji.name === "☑️") {
