@@ -25,7 +25,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
     if (user.bot) return; // If the user was a bot, return.
     if (!reaction.message.guild) return; // If the user was reacting something but not in the guild/server, ignore them.
     if (reaction.message.guild.id !== "531630990691532821") return;
-    if (user.roles.has("531856634406764544")) return;
+    
     
     if (reaction.message.channel.id === "582478995724173323") { // This is a #self-roles channel.
       if (reaction.emoji.name === "☑️") {
@@ -33,9 +33,26 @@ client.on("messageReactionAdd", async (reaction, user) => {
       }
       
     } else {
-      return; // If the channel was not a #self-roles, ignore them.
+      return; 
     }
   })
+
+client.on("messageReactionRemove", async (reaction, user) => {
+  
+  if (reaction.message.partial) await reaction.message.fetch();
+  if (reaction.partial) await reaction.fetch();
+  
+  if (user.bot) return;
+  if (!reaction.message.guild) return;
+  if (reaction.message.guild.id !== "53163099069153282") return;
+  
+  if (reaction.message.channel.id === "582478995724173323") {
+    if (reaction.emoji.name === "☑️") {
+      await reaction.message.guild.members.cache.get(user.id).roles.remove("531856634406764544") 
+    } else {
+    return;
+  }
+})
 
 client.on("message", async  message => {
     
