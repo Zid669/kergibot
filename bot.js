@@ -15,7 +15,7 @@ client.on("ready", () => {
     client.user.setActivity({name: "Kergi :p", type: "STREAMING", url: "https://www.twitch.tv/kergitv"});
 });
 
-client.on("messageReactionRemove", async (reaction, user) => {
+client.on("messageReactionAdd", async (reaction, user) => {
     // If a message gains a reaction and it is uncached, fetch and cache the message.
     // You should account for any errors while fetching, it could return API errors if the resource is missing.
     if (reaction.message.partial) await reaction.message.fetch(); // Partial messages do not contain any content so skip them.
@@ -36,7 +36,7 @@ client.on("messageReactionRemove", async (reaction, user) => {
     }
   })
 
-client.on("messageReactionAdd", async (reaction, user) => {
+client.on("messageReactionRemove", async (reaction, user) => {
     // If a message gains a reaction and it is uncached, fetch and cache the message.
     // You should account for any errors while fetching, it could return API errors if the resource is missing.
     if (reaction.message.partial) await reaction.message.fetch(); // Partial messages do not contain any content so skip them.
